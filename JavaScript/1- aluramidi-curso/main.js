@@ -44,25 +44,36 @@ const listOfKeys = document.querySelectorAll('.tecla');
 // const listOfSounds = document.querySelectorAll('audio').play;
 
 
-let ith = 0;
-
-while(ith < listOfKeys.length){
-    console.log(ith)
-
+for(let ith = 0; ith < listOfKeys.length; ith++){
 
     const key = listOfKeys[ith];
-
     const instrumentName = key.classList[1];
     
     const idAudioSelector = `#som_${instrumentName}` // Template String. Put js code in a string
-    // console.log(idAudioSelector);
 
     // Create an anonym function. It does not run immediately
     key.onclick = function(){
         playSong( idAudioSelector);
     }
-    ith = ith + 1;
+ 
 }
+
+
+// let ith = 0;
+
+// while(ith < listOfKeys.length){
+
+//     const key = listOfKeys[ith];
+//     const instrumentName = key.classList[1];
+    
+//     const idAudioSelector = `#som_${instrumentName}` // Template String. Put js code in a string
+
+//     // Create an anonym function. It does not run immediately
+//     key.onclick = function(){
+//         playSong( idAudioSelector);
+//     }
+//     ith = ith + 1;
+// }
 
 
 
