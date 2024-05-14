@@ -48,7 +48,6 @@ for(let ith = 0; ith < listOfKeys.length; ith++){
 
     const key = listOfKeys[ith];
     const instrumentName = key.classList[1];
-    
     const idAudioSelector = `#som_${instrumentName}` // Template String. Put js code in a string
 
     // Create an anonym function. It does not run immediately
@@ -74,7 +73,4 @@ for(let ith = 0; ith < listOfKeys.length; ith++){
 //     }
 //     ith = ith + 1;
 // }
-
-
-
 
