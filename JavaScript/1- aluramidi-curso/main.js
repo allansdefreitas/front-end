@@ -34,11 +34,35 @@ function playSongTom(){
     document.querySelector('#som_tecla_tom').play();
 }
 
+// A generic function
+function playSong(idAudioSelector){
+    document.querySelector(idAudioSelector).play();
+}
+
 
 const listOfKeys = document.querySelectorAll('.tecla');
+// const listOfSounds = document.querySelectorAll('audio').play;
 
 
-listOfKeys[0].onclick = playSongPom;
+let ith = 0;
+
+while(ith < listOfKeys.length){
+    console.log(ith)
+
+
+    const key = listOfKeys[ith];
+
+    const instrumentName = key.classList[1];
+    
+    const idAudioSelector = `#som_${instrumentName}` // Template String. Put js code in a string
+    // console.log(idAudioSelector);
+
+    // Create an anonym function. It does not run immediately
+    key.onclick = function(){
+        playSong( idAudioSelector);
+    }
+    ith = ith + 1;
+}
 
 
 
