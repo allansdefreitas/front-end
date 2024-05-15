@@ -1,42 +1,52 @@
-function playSongPom(){
-    document.querySelector('#som_tecla_pom').play();
-}
+// function playSongPom(){
+//     document.querySelector('#som_tecla_pom').play();
+// }
 
-function playSongClap(){
-    document.querySelector('#som_tecla_clap').play();
-}
+// function playSongClap(){
+//     document.querySelector('#som_tecla_clap').play();
+// }
 
-function playSongTim(){
-    document.querySelector('#som_tecla_tim').play();
-}
+// function playSongTim(){
+//     document.querySelector('#som_tecla_tim').play();
+// }
 
-function playSongPuff(){
-    document.querySelector('#som_tecla_puff').play();
-}
+// function playSongPuff(){
+//     document.querySelector('#som_tecla_puff').play();
+// }
 
-function playSongSplash(){
-    document.querySelector('#som_tecla_splash').play();
-}
+// function playSongSplash(){
+//     document.querySelector('#som_tecla_splash').play();
+// }
 
-function playSongToim(){
-    document.querySelector('#som_tecla_toim').play();
-}
+// function playSongToim(){
+//     document.querySelector('#som_tecla_toim').play();
+// }
 
-function playSongPsh(){
-    document.querySelector('#som_tecla_psh').play();
-}
+// function playSongPsh(){
+//     document.querySelector('#som_tecla_psh').play();
+// }
 
-function playSongTic(){
-    document.querySelector('#som_tecla_tic').play();
-}
+// function playSongTic(){
+//     document.querySelector('#som_tecla_tic').play();
+// }
 
-function playSongTom(){
-    document.querySelector('#som_tecla_tom').play();
-}
+// function playSongTom(){
+//     document.querySelector('#som_tecla_tom').play();
+// }
 
 // A generic function
-function playSong(idAudioSelector){
-    document.querySelector(idAudioSelector).play();
+function playSong(selector){
+    const element = document.querySelector(selector);
+    
+    // console.log(element);
+    if(element === null){ // we could write if(element) to test if it is null
+        // alert('Element not found');
+        console.error('Element not found');
+    } else if (element.localName === "audio"){
+        element.play();
+    }else{
+        console.error('Element is not reproducible')
+    }
 }
 
 
@@ -54,7 +64,22 @@ for(let ith = 0; ith < listOfKeys.length; ith++){
     key.onclick = function(){
         playSong( idAudioSelector);
     }
- 
+
+    key.onkeydown = function(event){
+
+        console.log(event.code); 
+        // console.log(event.code == "Space");
+
+        if(event.code === "Enter" || event.code === "Space"){
+            key.classList.add('ativa')
+            // console.log('added');
+        }
+    };
+
+    key.onkeyup = function(){
+        key.classList.remove('ativa');
+        // console.log('removed');
+    }
 }
 
 
