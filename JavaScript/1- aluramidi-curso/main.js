@@ -50,6 +50,7 @@ function playSong(selector){
 }
 
 
+
 const listOfKeys = document.querySelectorAll('.tecla');
 // const listOfSounds = document.querySelectorAll('audio').play;
 
@@ -81,6 +82,30 @@ for(let ith = 0; ith < listOfKeys.length; ith++){
         // console.log('removed');
     }
 }
+
+
+
+/* Ativar e desativar */
+/*
+document.querySelectorAll('.tecla').forEach(function(tecla) {
+    tecla.addEventListener('click', function() {
+        this.classList.add('ativa'); // same of tecla.classList...
+    });
+});
+
+document.querySelectorAll('.tecla').forEach(function(tecla) {
+    tecla.addEventListener('click', function(event) {
+        const elementoClicado = event.target;
+        console.log(event.target);
+        if (elementoClicado.classList.contains('ativa')) {
+            elementoClicado.classList.remove('ativa');
+        } else {
+            elementoClicado.classList.add('ativa');
+        }
+    });
+}); */
+
+
 
 
 // let ith = 0;
