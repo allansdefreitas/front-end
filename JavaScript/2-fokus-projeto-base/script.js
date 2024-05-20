@@ -11,6 +11,22 @@ const timer = document.querySelector('.app__card-timer'); // or '#timer'
 const appTitle = document.querySelector('.app__title');
 const appTitleStrong = document.querySelector('.app__title-strong');
 
+const toggleCheckBoxMusic = document.querySelector('#alternar-musica');
+const song = new Audio('/sons/luna-rise-part-one.mp3');
+song.loop = true;
+
+toggleCheckBoxMusic.addEventListener('change', ()=>{
+    // console.log(song.currentTime);
+    // console.log(song.volume);
+    
+    if(song.paused){
+        song.play();
+    }else{
+        song.pause();
+    }
+});
+
+
 const timeFoco = 1500;
 const timeDescansoCurto = 300;
 const timeDescansoLongo = 900;
