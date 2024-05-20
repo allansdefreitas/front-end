@@ -8,8 +8,9 @@ const appImage = document.querySelector('.app__image');
 
 const timerButton = document.querySelector('#start-pause');
 const timerButtonText = document.querySelector('#start-pause span');
+const iconTimerButton = document.querySelector('.app__card-primary-butto-icon');
 
-const timer = document.querySelector('.app__card-timer'); // or '#timer'
+const appTimer = document.querySelector('.app__card-timer'); // or '#timer'
 const appTitle = document.querySelector('.app__title');
 const appTitleStrong = document.querySelector('.app__title-strong');
 
@@ -41,25 +42,26 @@ const timeFoco = 1500;
 const timeDescansoCurto = 300;
 const timeDescansoLongo = 900;
 
-let elapsedTimeInSeconds = 5;
+let elapsedTimeInSeconds = timeFoco;
 let intervalId = null;
 
 focoButton.addEventListener('click', ()=> {
+    elapsedTimeInSeconds = timeFoco;
     changeContext('foco');
 })
 
 descansoCurtoButton.addEventListener('click', ()=> {
+    elapsedTimeInSeconds = timeDescansoCurto;
     changeContext('descanso-curto');
 })
 
 descansoLongoButton.addEventListener('click', () => {
+    elapsedTimeInSeconds = timeDescansoLongo;
     changeContext('descanso-longo');
 })
 
-
-
 function changeContext(context){
-
+    showAppTimer();
     buttonsList.forEach(function(button){
         button.classList.remove("active");
     })
@@ -73,21 +75,16 @@ function changeContext(context){
             Otimize sua produtividade,<br>
                 <strong class="app__title-strong">mergulhe no que importa.</strong>`;
             focoButton.classList.add("active");
-            // elapsedTimeInSeconds = timeFoco;
             break;
-
         case "descanso-curto":
             appTitle.innerHTML = `Que tal dar uma respirada?<br>
                 <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
-
             descansoCurtoButton.classList.add("active");
-            // elapsedTimeInSeconds = timeDescansoCurto;
             break;
         case "descanso-longo":
             appTitle.innerHTML = `Hora de voltar à superfície.<br>
                 <strong class="app__title-strong">Faça uma pausa longa.</strong>`;
             descansoLongoButton.classList.add("active");
-            // elapsedTimeInSeconds = timeDescansoLongo;
             break;
     
         default:
@@ -97,8 +94,9 @@ function changeContext(context){
 
 const countDown = () => {
     
+    showAppTimer();
     elapsedTimeInSeconds -= 1;
-    console.log('Timer: ' + elapsedTimeInSeconds);
+    // console.log('Timer: ' + elapsedTimeInSeconds);
     
     if(elapsedTimeInSeconds <= 0){
         resetCountDown();
@@ -114,22 +112,41 @@ function startOrPauseCountDown(){
     
     if(intervalId){ // If intervalId has a value (is not null)
         resetCountDown();
-        
         songPause.play();
         return
     }else{
         songPlay.play();
-        timerButtonText.textContent = "Pausar";
+        // timerButtonText.textContent = "Pausar";
+        configureTimerButtonToPausar();
     }     
 
     intervalId = setInterval(countDown, 1000); // 1000 miliseconds = 1 second
 }
 
 function resetCountDown(){
-    timerButtonText.textContent = "Começar";
+    configureTimerButtonToComecar();
     clearInterval(intervalId); 
     intervalId = null;
 }
+
+
+function configureTimerButtonToComecar(){
+    timerButtonText.textContent = "Começar";
+    iconTimerButton.setAttribute('src', '/imagens/play_arrow.png');
+}
+
+function configureTimerButtonToPausar(){
+    timerButtonText.textContent = "Pausar";
+    iconTimerButton.setAttribute('src', '/imagens/pause.png');
+}
+
+function showAppTimer(){
+    const time = new Date(elapsedTimeInSeconds * 1000);
+    const timeFormated = time.toLocaleString('pt-Br', {minute: '2-digit', second: '2-digit'});
+
+    appTimer.innerHTML = `${timeFormated}`;
+}
+showAppTimer();
 
 /*
 function changeContext(context){
