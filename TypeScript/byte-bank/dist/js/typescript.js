@@ -32,3 +32,4 @@ const transacao = {
     data: new Date(),
     valor: 0
 };
+console.log("transacao = " + transacao);

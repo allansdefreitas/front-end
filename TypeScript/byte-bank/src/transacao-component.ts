@@ -1,11 +1,3 @@
-let saldo = 3000;
-
-alert("Testing compiling wiht TypeScript");
-
-const elementoSaldo = document.querySelector(".saldo-valor .valor") as HTMLElement; // Assures that this input be an HTML Element
-if(elementoSaldo != null){
-        elementoSaldo.textContent = saldo.toString();
-}
 
 const elementoFormulario = document.querySelector(".block-nova-transacao form") as HTMLFormElement; // I know that it is an HTML form
 

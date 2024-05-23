@@ -50,3 +50,7 @@ const transacao: Transacao = {
     valor: 0
 }
 
+
+
+console.log("transacao = " + transacao);
+

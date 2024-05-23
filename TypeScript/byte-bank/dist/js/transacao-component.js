@@ -1,8 +1,3 @@
-let saldo = 3000;
-const elementoSaldo = document.querySelector(".saldo-valor .valor"); // Assures that this input be an HTML Element
-if (elementoSaldo != null) {
-    elementoSaldo.textContent = saldo.toString();
-}
 const elementoFormulario = document.querySelector(".block-nova-transacao form"); // I know that it is an HTML form
 elementoFormulario.addEventListener("submit", function (event) {
     event.preventDefault(); // Submit form without reload page (to avoid the lost of data)
