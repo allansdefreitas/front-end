@@ -1,21 +1,22 @@
-var saldo = 3000;
-var elementoSaldo = document.querySelector(".saldo-valor .valor"); // Assures that this input be an HTML Element
+let saldo = 3000;
+alert("Testing compiling wiht TypeScript");
+const elementoSaldo = document.querySelector(".saldo-valor .valor"); // Assures that this input be an HTML Element
 if (elementoSaldo != null) {
     elementoSaldo.textContent = saldo.toString();
 }
-var elementoFormulario = document.querySelector(".block-nova-transacao form"); // I know that it is an HTML form
+const elementoFormulario = document.querySelector(".block-nova-transacao form"); // I know that it is an HTML form
 elementoFormulario.addEventListener("submit", function (event) {
     event.preventDefault(); // Submit form without reload page (to avoid the lost of data)
     if (elementoFormulario.checkValidity() == false) {
         alert("Please, fill all fields of transaction!");
         return;
     }
-    var inputTipoTransacao = elementoFormulario.querySelector("#tipoTransacao");
-    var inputValor = elementoFormulario.querySelector("#valor");
-    var inputData = elementoFormulario.querySelector("#data");
-    var tipoTransacao = inputTipoTransacao.value;
-    var valor = inputValor.valueAsNumber;
-    var data = new Date(inputData.value);
+    const inputTipoTransacao = elementoFormulario.querySelector("#tipoTransacao");
+    const inputValor = elementoFormulario.querySelector("#valor");
+    const inputData = elementoFormulario.querySelector("#data");
+    let tipoTransacao = inputTipoTransacao.value;
+    let valor = inputValor.valueAsNumber;
+    let data = new Date(inputData.value);
     //     console.log(typeof(valor));
     if (tipoTransacao == "Depósito") {
         saldo += valor;
@@ -28,7 +29,7 @@ elementoFormulario.addEventListener("submit", function (event) {
     }
     console.log("saldo: " + saldo);
     elementoSaldo.textContent = saldo.toString();
-    var novaTransacao = {
+    const novaTransacao = {
         tipoTransacao: tipoTransacao,
         valor: valor,
         data: data,

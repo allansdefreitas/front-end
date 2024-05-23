@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "outDir": "./dist/js", // place where to put the js compiled files
+        "noEmitOnError": true //Compile only if there is no errors on ts file
+        
+    },
+    "include": [
+        "./src/**/*" // Consider these places during compiling process
+    ]
+}
