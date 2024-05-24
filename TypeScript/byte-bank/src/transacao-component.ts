@@ -29,7 +29,7 @@ elementoFormulario.addEventListener("submit", function (event) {
 
         console.log("saldo: " + saldo);
         // elementoSaldo.textContent = saldo.toString();
-        elementoSaldo.textContent = saldo.toLocaleString("pt-br", {currency: "BRL", style: "currency"});
+        elementoSaldo.textContent = formatCurrency(saldo);
 
         const novaTransacao: Transacao = {
                 tipo: tipoTransacao,

@@ -1,5 +1,10 @@
 let saldo = 3000;
 const elementoSaldo = document.querySelector(".saldo-valor .valor"); // Assures that this input be an HTML Element
 if (elementoSaldo != null) {
-    elementoSaldo.textContent = saldo.toLocaleString("pt-br", { currency: "BRL", style: "currency" });
+    elementoSaldo.textContent = formatCurrency(saldo);
+}
+const elementoDataAtual = document.querySelector(".block-saldo time");
+if (elementoDataAtual) {
+    const dataAtual = new Date();
+    elementoDataAtual.textContent = formatDate(dataAtual, FormatoData.DIA_SEAMANA_DIA_MES_ANO);
 }
