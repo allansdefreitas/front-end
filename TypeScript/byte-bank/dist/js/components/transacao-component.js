@@ -1,3 +1,5 @@
+import { TipoTransacao } from "../types/TipoTransacao.js";
+import { atualizarSaldo, getSaldo } from "./saldo-component.js";
 const elementoFormulario = document.querySelector(".block-nova-transacao form"); // I know that it is an HTML form
 elementoFormulario.addEventListener("submit", function (event) {
     event.preventDefault(); // Submit form without reload page (to avoid the lost of data)
@@ -11,6 +13,7 @@ elementoFormulario.addEventListener("submit", function (event) {
     let tipoTransacao = inputTipoTransacao.value;
     let valor = inputValor.valueAsNumber;
     let data = new Date(inputData.value);
+    let saldo = getSaldo();
     //     console.log(typeof(valor));
     if (tipoTransacao == TipoTransacao.DEPOSITO) {
         saldo += valor;
@@ -23,7 +26,8 @@ elementoFormulario.addEventListener("submit", function (event) {
     }
     console.log("saldo: " + saldo);
     // elementoSaldo.textContent = saldo.toString();
-    elementoSaldo.textContent = formatCurrency(saldo);
+    // elementoSaldo.textContent = formatCurrency(saldo);
+    atualizarSaldo(saldo);
     const novaTransacao = {
         tipo: tipoTransacao,
         valor: valor,

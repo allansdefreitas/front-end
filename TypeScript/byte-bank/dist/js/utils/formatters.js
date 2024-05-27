@@ -1,8 +1,9 @@
-function formatCurrency(valor) {
+import { FormatoData } from "../types/FormatoData.js";
+export function formatCurrency(valor) {
     const valueFormatted = valor.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
     return valueFormatted;
 }
-function formatDate(date, formato = FormatoData.PADRAO) {
+export function formatDate(date, formato = FormatoData.PADRAO) {
     let formattedDate = null;
     if (formato === FormatoData.DIA_SEAMANA_DIA_MES_ANO) {
         formattedDate = date.toLocaleDateString("pt-br", {
