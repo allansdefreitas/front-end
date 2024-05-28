@@ -1,8 +1,15 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 import { Armazenador } from "../utils/Armazenador.js";
+import { ValidaDebito } from "./Decorators.js";
 import { TipoTransacao } from "./TipoTransacao.js";
 export class Conta {
     nome;
-    saldo = Armazenador.obter("saldo") || 0;
+    saldo = Armazenador.obter("saldo") || 0; // The return will be a number
     transacoes = Armazenador.obter(("transacoes"), (key, value) => {
         if (key === "data") {
             return new Date();
@@ -57,12 +64,6 @@ export class Conta {
         Armazenador.salvar("transacoes", JSON.stringify(this.transacoes));
     }
     debitar(valor) {
-        if (valor <= 0) {
-            throw new Error("O valor a ser debitado deve ser maior que zero!");
-        }
-        if (valor > this.saldo) {
-            throw new Error("Saldo insuficiente!");
-        }
         this.saldo -= valor;
         Armazenador.salvar("saldo", this.saldo.toString());
     }
@@ -74,7 +75,19 @@ export class Conta {
         Armazenador.salvar("saldo", this.saldo.toString());
     }
 }
+__decorate([
+    ValidaDebito
+], Conta.prototype, "debitar", null);
+export class ContaPremium extends Conta {
+    registrarTransacao(transacao) {
+        if (transacao.tipoTransacao === TipoTransacao.DEPOSITO) {
+            console.log("You earned a bonus of R$ 0.50 cents");
+            transacao.valor += 0.5;
+        }
+        super.registrarTransacao(transacao);
+    }
+}
 const conta = new Conta("Allan Santos de Freitas");
+const contaPremium = new ContaPremium("John Reeves de Oliveira");
 console.log(conta.getTitular());
-// console.log(conta.nome)
 export default conta;

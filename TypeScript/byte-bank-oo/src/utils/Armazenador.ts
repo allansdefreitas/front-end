@@ -9,7 +9,7 @@ export class Armazenador {
         localStorage.setItem(key, valueAsString);
     }
 
-    public static obter(key: string, reviver?: (this: any, key: string, value: any) => any) {
+    public static obter<T>(key: string, reviver?: (this: any, key: string, value: any) => any): T | null { // Generic types (Generics)
 
         const value = localStorage.getItem(key);
 
@@ -18,10 +18,10 @@ export class Armazenador {
         }
 
         if (reviver){
-            return JSON.parse(value, reviver);
+            return JSON.parse(value, reviver) as T;
         }
 
-        return JSON.parse(value);
+        return JSON.parse(value) as T;
     }
 
 

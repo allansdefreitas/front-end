@@ -1,4 +1,5 @@
 import { Armazenador } from "../utils/Armazenador.js";
+import { ValidaDebito } from "./Decorators.js";
 import { GrupoTransacao } from "./GrupoTransacao.js";
 import { TipoTransacao } from "./TipoTransacao.js";
 import { Transacao } from "./Transacao.js";
@@ -7,8 +8,8 @@ import { Transacao } from "./Transacao.js";
 export class Conta {
 
     protected nome: string;
-    protected saldo: number = Armazenador.obter("saldo") || 0;
-    private transacoes: Transacao[] = Armazenador.obter(("transacoes"), (key: string, value: any) => {
+    protected saldo: number = Armazenador.obter<number>("saldo") || 0; // The return will be a number
+    private transacoes: Transacao[] = Armazenador.obter<Transacao[]>(("transacoes"), (key: string, value: any) => {
         if (key === "data"){
             return new Date();
         }else{
@@ -71,14 +72,8 @@ export class Conta {
         Armazenador.salvar("transacoes", JSON.stringify(this.transacoes));
     }
 
+    @ValidaDebito
     private debitar(valor: number): void {
-        if (valor <= 0) {
-            throw new Error("O valor a ser debitado deve ser maior que zero!");
-        }
-        if (valor > this.saldo) {
-            throw new Error("Saldo insuficiente!");
-        }
-    
         this.saldo -= valor;
        Armazenador.salvar("saldo", this.saldo.toString());
     }
@@ -94,7 +89,21 @@ export class Conta {
 }
 
 
+export class ContaPremium extends Conta{
+    registrarTransacao(transacao: Transacao): void {
+
+        if (transacao.tipoTransacao === TipoTransacao.DEPOSITO){
+            console.log("You earned a bonus of R$ 0.50 cents");
+            transacao.valor += 0.5;
+        }
+
+        super.registrarTransacao(transacao);
+    }
+}
+
+
 const conta = new Conta("Allan Santos de Freitas");
+const contaPremium = new ContaPremium("John Reeves de Oliveira");
+
 console.log(conta.getTitular());
-// console.log(conta.nome)
 export default conta;
