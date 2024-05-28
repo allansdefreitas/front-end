@@ -1,6 +1,7 @@
 import { TipoTransacao } from "../types/TipoTransacao.js";
 import { Transacao } from "../types/Transacao.js";
 import Conta from "../types/conta.js";
+import ExtratoComponent from "./extrato-component.js";
 import SaldoComponent from "./saldo-component.js"; // importa-se um módulo default assim
 // import * as saldo from "./saldo-component.js";
 
@@ -24,7 +25,8 @@ elementoFormulario.addEventListener("submit", function (event) {
 
                 let tipoTransacao: TipoTransacao = inputTipoTransacao.value as TipoTransacao;
                 let valor:number = inputValor.valueAsNumber;
-                let data:Date =  new Date(inputData.value);
+                // let data:Date =  new Date(inputData.value);
+                let data:Date =  new Date(inputData.value + " 00:00:00"); // To prevent the a "a day before" problem in JavaScript
 
                 const novaTransacao: Transacao = {
                         tipo: tipoTransacao,
@@ -34,6 +36,7 @@ elementoFormulario.addEventListener("submit", function (event) {
                 
                 Conta.registrarTransacao(novaTransacao);
                 SaldoComponent.atualizar();
+                ExtratoComponent.atualizar();
                 elementoFormulario.reset(); // Clean all fields
 
         }catch(error){

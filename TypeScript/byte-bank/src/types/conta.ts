@@ -79,6 +79,7 @@ const Conta = {
             creditar(transacao.valor);
         } else if (transacao.tipo == TipoTransacao.TRANSFERENCIA || transacao.tipo == TipoTransacao.PAGAMENTO_BOLETO) {
             debitar(transacao.valor);
+            transacao.valor *= -1; // to show a negative value
         }else{
             // alert("Tipo de transação inválido!");
             // return; 
@@ -87,7 +88,35 @@ const Conta = {
         transacoes.push(transacao);
         console.log("grupos transações: ", this.getGruposTransacoes());
         localStorage.setItem( "transacoes", JSON.stringify(transacoes) );   
+    },
+
+    agruparTransacoes(): ResumoTransacoes {
+        const resumo: ResumoTransacoes = { 
+            totalDepositos: 0, 
+            totalTransferencias: 0, 
+            totalPagamentosBoleto: 0 
+        };
+    
+        this.transacoes.forEach(transacao => {
+            switch (transacao.tipoTransacao) {
+                case TipoTransacao.DEPOSITO:
+                    resumo.totalDepositos += transacao.valor;
+                    break;
+    
+                case TipoTransacao.TRANSFERENCIA:
+                    resumo.totalTransferencias += transacao.valor;
+                    break;
+    
+                case TipoTransacao.PAGAMENTO_BOLETO:
+                    resumo.totalPagamentosBoleto += transacao.valor;
+                    break;
+            }
+        });
+    
+        return resumo;
     }
+    
+    
 }
 
 export default Conta;

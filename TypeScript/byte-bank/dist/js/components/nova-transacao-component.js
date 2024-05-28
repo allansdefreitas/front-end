@@ -1,4 +1,5 @@
 import Conta from "../types/conta.js";
+import ExtratoComponent from "./extrato-component.js";
 import SaldoComponent from "./saldo-component.js"; // importa-se um módulo default assim
 // import * as saldo from "./saldo-component.js";
 const elementoFormulario = document.querySelector(".block-nova-transacao form"); // I know that it is an HTML form
@@ -14,7 +15,8 @@ elementoFormulario.addEventListener("submit", function (event) {
         const inputData = elementoFormulario.querySelector("#data");
         let tipoTransacao = inputTipoTransacao.value;
         let valor = inputValor.valueAsNumber;
-        let data = new Date(inputData.value);
+        // let data:Date =  new Date(inputData.value);
+        let data = new Date(inputData.value + " 00:00:00"); // To prevent the a "a day before" problem in JavaScript
         const novaTransacao = {
             tipo: tipoTransacao,
             valor: valor,
@@ -22,6 +24,7 @@ elementoFormulario.addEventListener("submit", function (event) {
         };
         Conta.registrarTransacao(novaTransacao);
         SaldoComponent.atualizar();
+        ExtratoComponent.atualizar();
         elementoFormulario.reset(); // Clean all fields
     }
     catch (error) {

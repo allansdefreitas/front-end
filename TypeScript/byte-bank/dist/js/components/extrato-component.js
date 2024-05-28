@@ -30,7 +30,13 @@ function renderExtrato() {
     `;
     }
     if (htmlRegistroTransacoes === "") {
-        htmlRegistroTransacoes = "<div>Não há transações registradas</div>";
+        htmlRegistroTransacoes = "<div>Não há transações registradas.</div>";
     }
     elementoRegistroTransacoesExtrato.innerHTML = htmlRegistroTransacoes;
 }
+const ExtratoComponent = {
+    atualizar() {
+        renderExtrato();
+    }
+};
+export default ExtratoComponent;
