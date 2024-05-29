@@ -3,7 +3,7 @@
         "target": "ES2022",
         "outDir": "./dist/js/",
         "noEmitOnError": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true // Use decorators (false as default)
     },
     "include": [
         "./src/**/*"
