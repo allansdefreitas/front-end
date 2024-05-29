@@ -1,3 +1,9 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 export function ValidaDebito(target, propertyKey, descriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = function (valorDoDebito) {
@@ -44,3 +50,48 @@ export function LogTempo(target, propertyKey, descriptor) {
     // Retorna o descritor modificado
     return descriptor;
 }
+/* LEARN: DECORATORS =================================================================================  */
+/* DECLARE ========== */
+// Define um decorator de método chamado ValidaString
+export function ValidaString(target, propertyKey, descriptor) {
+    // Guarda uma referência ao método original
+    const originalMethod = descriptor.value;
+    // Substitui o método original por uma nova função
+    descriptor.value = function (valor) {
+        // Verifica se o valor é uma string
+        if (typeof valor !== "string") {
+            // Se não for, lança um erro
+            throw new Error("O valor deve ser uma string!");
+        }
+        // Se for, chama o método original com o valor como argumento
+        return originalMethod.apply(this, [valor]);
+    };
+    // Retorna o descritor modificado
+    return descriptor;
+}
+/* USE ========== */
+// Importa o decorator ValidaString
+// import { ValidaString } from "./ValidaString";
+// Define uma classe livro
+class Livro {
+    // Define uma propriedade titulo
+    titulo;
+    // Define um construtor que recebe o titulo como parâmetro
+    constructor(titulo) {
+        this.titulo = titulo;
+    }
+    // Aplica o decorator ValidaString ao método imprimirTitulo
+    imprimirTitulo(valor) {
+        // Imprime o valor na tela
+        console.log(valor);
+    }
+}
+__decorate([
+    ValidaString
+], Livro.prototype, "imprimirTitulo", null);
+// Cria uma instância da classe Livro
+let livro = new Livro("Senhor dos Aneis");
+// Chama o método imprimirTitulo com um valor válido
+livro.imprimirTitulo("Senhor dos Aneis"); // OK
+// Chama o método imprimirTitulo com um valor inválido
+livro.imprimirTitulo(42); // Error: O valor deve ser uma string!
