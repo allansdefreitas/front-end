@@ -41,6 +41,24 @@ export class AppComponent {
 
   getTextoBusca(){
     return this.textoBusca;
+    
+  }
+
+  getTextoBuscaSemSimbolos(){
+    return this.removeSpecialCharacters(this.getTextoBusca());
+  }
+
+  private removeSpecialCharacters(texto: string): string{
+
+    let circunflexoO = 'ô';
+    if(texto.includes(circunflexoO)){
+      console.log("ô found");
+      texto = texto.replace("ô", "o");
+      console.log(texto + " Now");
+    }
+
+    
+    return texto;
   }
 
   filtrarContatosPorTexto(): Contato[]{
@@ -48,14 +66,14 @@ export class AppComponent {
     // this.text
 
     // or if(!this.textoBusca)
-    if(this.textoBusca.length ===0){
+    if(this.getTextoBuscaSemSimbolos().length ===0){
       return this.contatos;
     }else{
       return this.contatos.filter(contato => {
         let ithContatoNome = contato.nome;
         let ithContatoNomeLower: string = ithContatoNome.toLowerCase();
 
-        return ithContatoNomeLower.includes(this.textoBusca);
+        return ithContatoNomeLower.includes(this.getTextoBuscaSemSimbolos());
 
       })
     }
