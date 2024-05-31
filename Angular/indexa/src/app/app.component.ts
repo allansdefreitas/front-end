@@ -49,16 +49,7 @@ export class AppComponent {
   }
 
   private removeSpecialCharacters(texto: string): string{
-
-    let circunflexoO = 'ô';
-    if(texto.includes(circunflexoO)){
-      console.log("ô found");
-      texto = texto.replace("ô", "o");
-      console.log(texto + " Now");
-    }
-
-    
-    return texto;
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
   filtrarContatosPorTexto(): Contato[]{
@@ -70,7 +61,7 @@ export class AppComponent {
       return this.contatos;
     }else{
       return this.contatos.filter(contato => {
-        let ithContatoNome = contato.nome;
+        let ithContatoNome = this.removeSpecialCharacters(contato.nome);
         let ithContatoNomeLower: string = ithContatoNome.toLowerCase();
 
         return ithContatoNomeLower.includes(this.getTextoBuscaSemSimbolos());
@@ -88,7 +79,7 @@ export class AppComponent {
     
     // or return this.filtrarContatosPorTexto.filter(...
     return this.filtrarContatosPorTexto().filter ( contato => {
-      let letraInicialNome: string = contato.nome.toLowerCase();
+      let letraInicialNome: string = this.removeSpecialCharacters(contato.nome.toLowerCase());
       return letraInicialNome.startsWith(letra);
     })    
 
