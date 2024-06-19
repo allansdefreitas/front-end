@@ -3,15 +3,19 @@ function toggleSubMenu(item, show){
 
     if(subMenu){
 
+        const elementAnchor = item.querySelector("a");
+        const elementSpanArrowIcon = item.querySelector(".material-symbols-outlined.icone");
+
+        // const dropDownExpandedIcon =  item.querySelector(".material-symbols-outlined icone");
         if(show){
             subMenu.style.display = "block"
         }else{
             subMenu.style.display = "none"
         }
-    }
-        // const propertyValue = show ? "block" : "none";
-        // subMenu.style.display = propertyValue;
-    
+        
+        elementAnchor.setAttribute("aria-expanded", show);
+        elementSpanArrowIcon.classList.toggle("active", show);
+    }    
 }
 const listItems = document.querySelectorAll(".cabecalho__lista-item");
 
