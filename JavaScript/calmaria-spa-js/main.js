@@ -1,3 +1,21 @@
+function toggleModal(modalId, show){
+    const modal = document.querySelector(`#${modalId}`);
+
+    if(modal){
+
+        if (show){
+            modal.style.display =  "block";
+            document.body.style.overflow = "hidden";
+
+        }else{
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+    }
+
+}
+
 function toggleSubMenu(item, show){
     const subMenu = item.querySelector(".submenu");
 
