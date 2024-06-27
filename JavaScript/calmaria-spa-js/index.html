@@ -171,7 +171,7 @@
       <p class="infos">
         Reserve seu horário, tire dúvidas e proponha sugestões!
       </p>
-      <button class="btn-contato" aria-label="Clique para Entrar em contato">
+      <button class="btn-contato" aria-label="Clique para Entrar em contato" onclick="toggleModal('ver-modal-contato', true)">
         Entrar em contato
       </button>
     </div>
@@ -186,7 +186,7 @@
             Preencha seus dados:
           </h2>
           <!-- Botão para fechar a janela modal 'ver-modal-contato' -->
-          <button class="cabecalho-modal-fechar" aria-label="Botão para fechar o formulário" tabindex="0">
+          <button class="cabecalho-modal-fechar" aria-label="Botão para fechar o formulário" tabindex="0" onclick="toggleModal('ver-modal-contato', false)">
             <span aria-hidden="true">×</span>
           </button>
         </div>
@@ -237,7 +237,7 @@
 
         <div class="rodape-modal">
           <!-- Botão para fechar a janela modal 'ver-modal-contato' -->
-          <button class="btn-enviar" tabindex="0">
+          <button class="btn-enviar" tabindex="0" >
             Enviar
           </button>
         </div>
@@ -254,7 +254,7 @@
           </h2>
           <img class="cabecalho-icone-modal-enviado" src="./assets/icon-enviado.png" alt="" />
           <!-- Botão para fechar a janela modal 'ver-modal-enviado' contato-->
-          <button class="btn-fechar" tabindex="0" aria-label="Fechar formulário enviado">
+          <button class="btn-fechar" tabindex="0" aria-label="Fechar formulário enviado" onclick="toggleModal('ver-modal-enviado', false)">
             Fechar
           </button>
         </div>
