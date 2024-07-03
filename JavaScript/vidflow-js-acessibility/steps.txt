@@ -1,0 +1,6 @@
+#pacote json-server localmente
+npm install json-server@0.16.0 -D
+
+#show version of local json-server
+npx json-server --watch backend/videos.json
+
