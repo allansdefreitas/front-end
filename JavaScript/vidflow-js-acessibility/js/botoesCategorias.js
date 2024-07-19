@@ -9,7 +9,8 @@ botoesCategorias.forEach((botao) => {
     atualizarEstadosDosBotoes(categoriaSelecionada);
   });
 
-  botao.addEventListener("keydown", changeFocusByKeyboard)
+  // botao.addEventListener("keydown", changeFocusByKeyboard)
+  botao.addEventListener("keydown", mudarFocoPorTeclado);
 });
 
 function associarPainel(categoriaSelecionada){
@@ -62,35 +63,138 @@ function changeFocusByKeyboard(event){
   
   if(event.key === "ArrowRight"){
     if(currentButton === tablist.lastElementChild){
-       tablist.firstElementChild.focus();
+      nextButton = tablist.firstElementChild;
+    }else{
+      nextButton = currentButton.nextElementSibling;
     }
-
-    nextButton = currentButton.nextElementSibling;
-
-    nextButton.focus();
-
     // currentButton.setAttribute("tabindex", "-1");
     // nextButton.setAttribute("tabindex", "0");
 
   }else if(event.key === "ArrowLeft"){
 
     if(currentButton === tablist.firstElementChild){
-      tablist.lastElementChild.focus();
+      nextButton = tablist.lastElementChild;
     }else{
       nextButton = currentButton.previousElementSibling;
-      nextButton.focus();
 
       // currentButton.setAttribute("tabindex", "-1");
       // nextButton.setAttribute("tabindex", "0");
     }
   }else if(event.key === "Home"){
-    tablist.firstElementChild.focus();
+    nextButton = tablist.firstElementChild;
   }else if(event.key === "End"){
-    tablist.lastElementChild.focus();
+    nextButton = tablist.lastElementChild;
   }
-
+  
+  nextButton.focus();
   nextButton.scrollIntoView({
     behavior: "smooth"
   });
+  
+  // console.log(nextButton);
+
+  // if (nextButton) {
+  //   nextButton.scrollIntoView({
+  //     behavior: "smooth"
+  //   });
+  // }else{
+  //   console.log(nextButton);
+  // }
 
 }
+
+function mudarFocoPorTeclado(evento) {
+  const botaoAtual = evento.target;
+  let novoBotao;
+
+  switch (evento.key) {
+    case "ArrowRight":
+      evento.preventDefault();
+      if (botaoAtual === tablist.lastElementChild) {
+        novoBotao = tablist.firstElementChild;
+      } else {
+        novoBotao = botaoAtual.nextElementSibling;
+      }
+      break;
+    case "ArrowLeft":
+      evento.preventDefault();
+      if (botaoAtual === tablist.firstElementChild) {
+        novoBotao = tablist.lastElementChild;
+      } else {
+        novoBotao = botaoAtual.previousElementSibling;
+      }
+      break;
+    case "Home":
+      novoBotao = tablist.firstElementChild;
+      break;
+    case "End":
+      novoBotao = tablist.lastElementChild;
+      break;
+  }
+
+  novoBotao.focus();
+  novoBotao.scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+/* CÓDIGO DO INSTRUTOR: funcionando, mas sem navegação pelas teclas Home e End 
+function mudarFocoPorTeclado(evento) {
+  const botaoAtual = evento.target;
+
+  if (evento.key === "ArrowRight") {
+    if (botaoAtual === tablist.lastElementChild) {
+      tablist.firstElementChild.focus();
+    } else {
+      botaoAtual.nextElementSibling.focus();
+    }
+  } else if (evento.key === "ArrowLeft") {
+    if (botaoAtual === tablist.firstElementChild) {
+      tablist.lastElementChild.focus();
+    } else {
+      botaoAtual.previousElementSibling.focus();
+    }
+  }
+}
+*/
+
+
+
+/* CÓDIGO DO INSTRUTOR: com erro ainda
+
+    function mudarFocoPorTeclado(evento) {
+      const botaoAtual = evento.target;
+      let novoBotao;
+    
+      switch (evento.key) {
+        case "ArrowRight":
+          evento.preventDefault();
+          if (botaoAtual === tablist.lastElementChild) {
+            novoBotao = tablist.firstElementChild;
+          } else {
+            novoBotao = botaoAtual.nextElementSibling;
+          }
+          break;
+        case "ArrowLeft":
+          evento.preventDefault();
+          if (botaoAtual === tablist.firstElementChild) {
+            novoBotao = tablist.lastElementChild;
+          } else {
+            novoBotao = botaoAtual.previousElementSibling;
+          }
+          break;
+        case "Home":
+          novoBotao = tablist.firstElementChild;
+          break;
+        case "End":
+          novoBotao = tablist.lastElementChild;
+          break;
+      }
+    
+      novoBotao.focus();
+      novoBotao.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+*/
