@@ -1,0 +1,4 @@
+ng new indexa
+ng serve
+ng generate component componentes/container
+ng g c componentes/contato
