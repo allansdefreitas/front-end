@@ -11,6 +11,7 @@ describe('CabecalhoComponent', () => {
       imports: [CabecalhoComponent]
     })
     .compileComponents();
+
     
     fixture = TestBed.createComponent(CabecalhoComponent);
     component = fixture.componentInstance;
