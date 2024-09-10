@@ -4,11 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 
-interface Contato {
-  id: number
-  nome: string
-  telefone: string
-}
 
 import { CabecalhoComponent } from '../../componentes/cabecalho/cabecalho.component';
 import { ContainerComponent } from '../../componentes/container/container.component';
@@ -16,6 +11,7 @@ import { ContatoComponent } from '../../componentes/contato/contato.component';
 import { SeparadorComponent } from '../../componentes/separador/separador.component';
 
 import { ContatoService } from '../../services/contato.service';
+import { Contato } from '../../componentes/contato/contato';
 
 
 @Component({

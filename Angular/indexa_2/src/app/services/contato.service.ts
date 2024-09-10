@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Contato } from '../componentes/contato/contato';
 
-
-interface Contato {
-  id: number
-  nome: string
-  telefone: string
-}
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +10,10 @@ export class ContatoService {
   private CONTATOS_LOCAL_STORAGE_KEY = 'contatos'; 
 
   private contatos: Contato[] = [
-    {"id": 1, "nome": "Ana", "telefone": "29 278869420"},
-    {"id": 2, "nome": "Antônio", "telefone": "38 128451235"},
-    {"id": 3, "nome": "Ágata", "telefone": "38 128451235"},
-    {"id": 4, "nome": "Bruno", "telefone": "95 695521583"}
+    {"id": 1, "nome": "Ana", "telefone": "29 278869420", "email" : "ana@gmail.com"},
+    {"id": 2, "nome": "Antônio", "telefone": "38 128451235", "email" : "antonio@gmail.com"},
+    {"id": 3, "nome": "Ágata", "telefone": "38 128451235", "email" : "agata@gmail.com"},
+    {"id": 4, "nome": "Bruno", "telefone": "95 695521583", "email" : "bruno@gmail.com"}
   ];
 
 
