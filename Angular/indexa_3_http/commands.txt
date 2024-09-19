@@ -1,0 +1,12 @@
+ng new indexa
+ng serve
+ng generate component componentes/container
+ng g c componentes/contato
+
+
+
+
+npm i -g json-server@0.17.4
+cd backend/
+npm init -y
+npm start
