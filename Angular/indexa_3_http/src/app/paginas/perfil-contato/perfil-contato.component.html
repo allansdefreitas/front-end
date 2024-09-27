@@ -16,7 +16,20 @@
     </header>
 
     <section class="perfil">
+
+        <div class="imagem-perfil">
+            <img [src]="contato.avatar" alt="Avatar do contato">
+            <h2><strong>{{ contato.nome }}</strong></h2>
+        </div>
+        <app-separador></app-separador>
+
+
         <ul>
+            <li>
+                <i class="material-icons">person</i>
+                <strong>Nome</strong>
+            </li>
+            <li>{{ contato.nome }}</li>
             <li>
                 <i class="material-icons">call</i>
                 <strong>Telefone</strong>
@@ -39,10 +52,10 @@
             <li>{{ contato.redes }}</li>
         </ul>
         <div class="botoes">
-            <button class="botao-excluir">
+            <button (click)="excluirContato()" class="botao-excluir">
                 Excluir contato
             </button>
-            <button class="botao-editar">
+            <button [routerLink]="['/perfil-contato', contato.id]" class="botao-editar">
                 Editar
             </button>
         </div>

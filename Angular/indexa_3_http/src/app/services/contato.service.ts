@@ -24,4 +24,29 @@ export class ContatoService {
     return this.http.post<Contato>(this.API_URL, contato);
   }
 
+  buscarPorId(id: number): Observable<Contato>{
+    const templateStringUrl = `${this.API_URL}/${id}`;
+
+    return this.http.get<Contato>(templateStringUrl);
+  }
+  removerPorId(id: number): Observable<Contato>{
+    const templateStringUrl = `${this.API_URL}/${id}`;
+    
+    return this.http.delete<Contato>(templateStringUrl);
+  }
+
+  editarContato(contato: Contato){
+    const url = `${this.API_URL}/${contato.id}`;
+    return this.http.put<Contato> (url, contato);
+  }
+
+  editarOuSalvarContato(contato: Contato): Observable<Contato>{
+    if(contato.id){
+      return this.editarContato(contato);
+    }else{
+      return this.salvarContato(contato);
+    }
+  }
+
+
 }
