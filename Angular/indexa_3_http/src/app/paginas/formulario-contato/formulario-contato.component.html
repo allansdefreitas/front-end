@@ -1,6 +1,9 @@
 <app-container>
 
-    <header>
+    <app-cabecalho [bannerSrc]="'assets/adicionar-contato.png'" [titulo]="'Adicionar contato'">
+    </app-cabecalho>
+
+    <!-- <header>
         <section class="cabecalho-link">
             <img src="assets/logo.png" alt="">
             <div>
@@ -14,10 +17,10 @@
             <img src="assets/adicionar-contato.png" alt="">
             <h1>Adicionar contato</h1>
         </section>
-    </header>
+    </header> -->
 
 
-    <app-separador></app-separador>
+    <!-- <app-separador></app-separador> -->
 
     <form [formGroup]="contatoForm" (ngSubmit)="salvarContato()">
 
