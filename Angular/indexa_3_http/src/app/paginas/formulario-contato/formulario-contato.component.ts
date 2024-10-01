@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { ContatoService } from '../../services/contato.service';
+import { MensagemErroComponent } from '../../componentes/mensagem-erro/mensagem-erro.component';
 
 @Component({
   selector: 'app-formulario-contato',
@@ -16,7 +17,8 @@ import { ContatoService } from '../../services/contato.service';
     SeparadorComponent,
     ReactiveFormsModule,
     CommonModule,
-    RouterLink
+    RouterLink,
+    MensagemErroComponent
 ],
   templateUrl: './formulario-contato.component.html',
   styleUrl: './formulario-contato.component.css'
@@ -48,6 +50,14 @@ export class FormularioContatoComponent implements OnInit{
       observacoes: new FormControl(''),
 
     });
+  }
+
+  obterControle(nome: string): FormControl {
+    const control = this.contatoForm.get(nome)
+    if(!control) {
+        throw new Error('Controle de formulário não encontrado: ' + nome)
+    }
+    return control as FormControl // Cast explícito
   }
   
   carregarContato() {

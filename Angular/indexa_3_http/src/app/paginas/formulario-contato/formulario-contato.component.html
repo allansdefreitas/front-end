@@ -34,23 +34,30 @@
 
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome" placeholder="Digite o nome do contato" formControlName="nome">
-        @if (contatoForm.get('nome')?.errors && contatoForm.get('nome')?.touched) {
+        <app-mensagem-erro [control]="obterControle('nome')"></app-mensagem-erro>
+
+        <!-- @if (contatoForm.get('nome')?.errors && contatoForm.get('nome')?.touched) {
         <div class="mensagem-erro">Campo obrigatório</div>
-        }
+        } -->
+
         <label for="telefone">Telefone</label>
         <input type="text" name="telefone" id="telefone" placeholder="Digite o telefone do contato"
             formControlName="telefone">
-        @if (contatoForm.get('telefone')?.errors && contatoForm.get('telefone')?.touched) {
+        <app-mensagem-erro [control]="obterControle('telefone')"></app-mensagem-erro>
+        <!-- @if (contatoForm.get('telefone')?.errors && contatoForm.get('telefone')?.touched) {
         <div class="mensagem-erro">Campo obrigatório</div>
-        }
+        } -->
+
+
         <label for="email">Email</label>
         <input type="text" name="email" id="email" placeholder="Digite o email do contato" formControlName="email">
-        @if (contatoForm.get('email')?.errors?.['required'] && contatoForm.get('email')?.touched) {
+        <app-mensagem-erro [control]="obterControle('email')"></app-mensagem-erro>
+        <!-- @if (contatoForm.get('email')?.errors?.['required'] && contatoForm.get('email')?.touched) {
         <div class="mensagem-erro">Campo obrigatório</div>
         }
         @if (contatoForm.get('email')?.errors?.['email'] && contatoForm.get('email')?.touched) {
         <div class="mensagem-erro">Formato de email inválido</div>
-        }
+        } -->
 
         <app-separador></app-separador>
 
