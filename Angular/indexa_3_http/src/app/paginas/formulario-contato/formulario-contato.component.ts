@@ -49,7 +49,7 @@ export class FormularioContatoComponent implements OnInit{
       email: new FormControl('', [Validators.required, Validators.email]),
       aniversario: new FormControl(''),
       redes: new FormControl(''),
-      observacoes: new FormControl(''),
+      observacoes: new FormControl('')
 
     });
   }
